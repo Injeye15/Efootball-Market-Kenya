@@ -1,0 +1,29 @@
+name: Build eFootball Market Kenya APK
+
+on: [push, workflow_dispatch]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Check repository files
+        run: |
+          echo "Files in repository:"
+          ls -la
+          find . -maxdepth 4 -type f | head -100
